@@ -69,10 +69,12 @@ document.querySelectorAll('.feature-card').forEach(card => {
 
 // Dynamic gradient animation speed based on scroll
 window.addEventListener('scroll', () => {
-    const scrollPercent = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight);
+    const totalScrollable = document.documentElement.scrollHeight - window.innerHeight;
+    const scrollPercent = totalScrollable > 0 ? window.scrollY / totalScrollable : 0;
     const bgAnimation = document.querySelector('.bg-animation');
     if (bgAnimation) {
-        bgAnimation.style.animationDuration = (15 - scrollPercent * 10) + 's';
+        const duration = 15 - scrollPercent * 10;
+        bgAnimation.style.animationDuration = Math.max(5, duration) + 's';
     }
 });
 
